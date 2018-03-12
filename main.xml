@@ -1,0 +1,17 @@
+<users>
+<user>
+<name>sam</name> 
+<age>19</age> 
+<gender>female</gender> 
+</user> 
+<user>
+<name>gus</name> 
+<age>23</age> 
+<gender>male</gender> 
+</user> 
+<user>
+<name>georgie</name> 
+<age>20</age> 
+<gender>female</gender> 
+</user> 
+</users> 

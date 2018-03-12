@@ -1,0 +1,4 @@
+name, age, gender
+sam, 19, female
+gus, 23, male
+georgie, 20, female
