@@ -1,17 +1,52 @@
-
-def open(str):
+#creates the XML tags
+def openbracket(str):
     return "<"+str+">"
 
-def close(str):
-    return "</"+str+">"
+def closebracket(str):
+    return "</"+str+"> \n"
 
-def openFile(str):
-    file = open(str, "r")
-    print(file.readlines())
 
 def main():
-    filename = 'C:\\Users\student\Documents\CS Homeworks\main.txt'
-    openFile(filename)
+
+    #get the name of the file we want to read
+    filename = input("Enter the path to the CSV file you want to convert \n")
+    entitiyname = input("What will your entries be called? enter 'd' for default")
+
+    if(entitiyname == "d"):
+        entitiyname = "object"
+
+    #create the new xml file
+    newfilename = filename[0: len(filename)-4] + ".xml"
+    newfile = open(newfilename, "w")
+    newfile.write(openbracket(entitiyname + "s"))
+    newfile.write("\n")
+
+    #open CSV file and iterate over lines
+    with open(filename, "r") as file:
+        linect = 0
+        for line in file:
+            #take in first line which includes the attributes
+            if(linect < 1):
+                headers = line.strip()
+                headers_arr = headers.split(', ')
+            else:
+                #for every data line, write the corresponding entry into it
+                data = line.strip()
+                data_arr = data.split(", ")
+
+                newfile.write(openbracket(entitiyname) + "\n")
+
+                for element in headers_arr:
+                    newfile.write(openbracket(element))
+                    newfile.write(data_arr[headers_arr.index(element)])
+                    newfile.write(closebracket(element))
+
+                newfile.write(closebracket(entitiyname))
+
+            linect += 1
+
+    newfile.write(closebracket(entitiyname + "s"))
+    newfile.close()
 
 
 main()
