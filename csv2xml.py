@@ -5,6 +5,12 @@ def openbracket(str):
 def closebracket(str):
     return "</"+str+"> \n"
 
+def splitArray(str):
+    if("|" in str):
+        arr = str.split("| ")
+        return arr
+    else:
+        return str
 
 def main():
 
@@ -37,9 +43,16 @@ def main():
                 newfile.write(openbracket(entitiyname) + "\n")
 
                 for element in headers_arr:
-                    newfile.write(openbracket(element))
-                    newfile.write(data_arr[headers_arr.index(element)])
-                    newfile.write(closebracket(element))
+                    writeme = splitArray(data_arr[headers_arr.index(element)])
+                    if(writeme == data_arr[headers_arr.index(element)]):
+                        newfile.write(openbracket(element))
+                        newfile.write(writeme)
+                        newfile.write(closebracket(element))
+                    else:
+                        for el in writeme:
+                            newfile.write(openbracket(element))
+                            newfile.write(el)
+                            newfile.write(closebracket(element))                
 
                 newfile.write(closebracket(entitiyname))
 
